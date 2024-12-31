@@ -172,7 +172,8 @@
 
           try {
             // Send the form data to the backend API
-            const response = await fetch("http://127.0.0.1:5000/api/feedback", {
+            const apiUrl = process.env.API_URL || "http://127.0.0.1:5000"; // Use localhost for development
+            const response = await fetch("${apiUrl}/api/feedback", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
