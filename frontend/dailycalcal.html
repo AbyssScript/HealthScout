@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daily Calorie Calculator</title>
+    <style>
+      body {
+        font-family: "Times index Roman", Times, serif;
+        margin: 0;
+        padding: 0;
+        background-color: #ffffff;
+      }
+
+      header {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      header .logo {
+        display: flex;
+        align-items: center;
+      }
+      header .logo img {
+        height: 80px;
+        margin-right: 10px;
+      }
+      header nav a {
+        color: #4f6f96;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 10px;
+        padding: 10px;
+        transition: 0.5s;
+        border-radius: 4px;
+      }
+      header nav a:hover {
+        color: #77bec6;
+        transform: scale(1.1);
+        background-color: #2e3f62;
+        padding: 10px;
+      }
+
+      /* Container styling */
+      .calculator-container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 20px;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #77bec6, #2e3f62);
+        color: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .calculator-container h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .calculator-container label {
+        font-size: 16px;
+        display: block;
+        margin: 10px 0 5px;
+      }
+
+      .calculator-container input,
+      .calculator-container select,
+      .calculator-container button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .calculator-container button {
+        background-color: #2e3f62;
+        color: #ffffff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .calculator-container button:hover {
+        background-color: #4f6f96;
+      }
+
+      /* Result Section */
+      .calorie-result {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      /* Activity Level Table */
+      .activity-table {
+        margin-top: 30px;
+        padding: 15px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        color: #2e3f62;
+      }
+
+      .activity-table table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .activity-table th,
+      .activity-table td {
+        border: 1px solid #77bec6;
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+      }
+
+      .activity-table th {
+        background-color: #77bec6;
+        color: #ffffff;
+      }
+
+      .h2 {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <body>
+    <header>
+      <div class="logo">
+        <img src="images/healthscout1.png" alt="Logo" />
+      </div>
+      <nav>
+        <a href="index.html">HOME</a>
+      </nav>
+    </header>
+
+    <div class="calculator-container">
+      <h1>Daily Calorie Calculator</h1>
+      <label for="age">Age</label>
+      <input type="number" id="age" placeholder="Enter your age" />
+
+      <label for="gender">Gender</label>
+      <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+
+      <label for="height">Height</label>
+      <div>
+        <input type="number" id="height" placeholder="Enter your height" />
+        <select id="height-unit">
+          <option value="cm">cm</option>
+          <option value="inches">inches</option>
+        </select>
+      </div>
+
+      <label for="weight">Weight</label>
+      <div>
+        <input type="number" id="weight" placeholder="Enter your weight" />
+        <select id="weight-unit">
+          <option value="kg">kg</option>
+          <option value="lbs">lbs</option>
+        </select>
+      </div>
+
+      <label for="activity-level">Activity Level</label>
+      <select id="activity-level">
+        <option value="1.2">Sedentary (little to no exercise)</option>
+        <option value="1.375">
+          Lightly Active (light exercise 1-3 days/week)
+        </option>
+        <option value="1.55">
+          Moderately Active (moderate exercise 3-5 days/week)
+        </option>
+        <option value="1.725">Very Active (hard exercise 6-7 days/week)</option>
+        <option value="1.9">
+          Extra Active (very hard exercise or physical job)
+        </option>
+      </select>
+
+      <button onclick="calculateCalories()">Calculate Calories</button>
+
+      <div class="calorie-result" id="calorie-result"></div>
+
+      <div class="activity-table">
+        <h2 class="h2">Activity Level Details</h2>
+        <table>
+          <tr>
+            <th>Activity Level</th>
+            <th>Description</th>
+            <th>Examples</th>
+          </tr>
+          <tr>
+            <td>Sedentary (BMR x 1.2)</td>
+            <td>Little or no exercise.</td>
+            <td>Desk job or minimal physical activity.</td>
+          </tr>
+          <tr>
+            <td>Lightly Active (BMR x 1.375)</td>
+            <td>Light exercise 1-3 days per week.</td>
+            <td>Walking, yoga.</td>
+          </tr>
+          <tr>
+            <td>Moderately Active (BMR x 1.55)</td>
+            <td>Moderate exercise 3-5 days per week.</td>
+            <td>Running, swimming, or playing sports.</td>
+          </tr>
+          <tr>
+            <td>Very Active (BMR x 1.725)</td>
+            <td>Hard exercise 6-7 days per week.</td>
+            <td>Heavy gym workouts, intense sports.</td>
+          </tr>
+          <tr>
+            <td>Extra Active (BMR x 1.9)</td>
+            <td>Very hard exercise or physical job.</td>
+            <td>Professional athletes, construction work.</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      function calculateCalories() {
+        const age = parseInt(document.getElementById("age").value);
+        const gender = document.getElementById("gender").value;
+        const height = parseFloat(document.getElementById("height").value);
+        const heightUnit = document.getElementById("height-unit").value;
+        const weight = parseFloat(document.getElementById("weight").value);
+        const weightUnit = document.getElementById("weight-unit").value;
+        const activityLevel = parseFloat(
+          document.getElementById("activity-level").value
+        );
+
+        let heightInCm = height;
+        if (heightUnit === "inches") {
+          heightInCm = height * 2.54;
+        }
+
+        let weightInKg = weight;
+        if (weightUnit === "lbs") {
+          weightInKg = weight * 0.453592;
+        }
+
+        let bmr;
+        if (gender === "male") {
+          bmr = 88.362 + 13.397 * weightInKg + 4.799 * heightInCm - 5.677 * age;
+        } else {
+          bmr = 447.593 + 9.247 * weightInKg + 3.098 * heightInCm - 4.33 * age;
+        }
+
+        const dailyCalories = (bmr * activityLevel).toFixed(2);
+
+        document.getElementById(
+          "calorie-result"
+        ).textContent = `Your daily caloric need is ${dailyCalories} calories.`;
+      }
+    </script>
+  </body>
+</html>

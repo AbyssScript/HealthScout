@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Type Information</title>
+    <style>
+      body {
+        font-family: "Times index Roman", Times, serif;
+        margin: 0;
+        background-color: #f7f9fc;
+        color: #2e3f62;
+      }
+
+      header {
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      header .logo {
+        display: flex;
+        align-items: center;
+      }
+
+      header .logo img {
+        height: 80px;
+        margin-right: 10px;
+      }
+
+      header nav a {
+        color: #4f6f96;
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 10px;
+        padding: 10px;
+        transition: 0.5s;
+        border-radius: 4px;
+      }
+
+      header nav a:hover {
+        color: #77bec6;
+        transform: scale(1.1);
+        background-color: #2e3f62;
+        padding: 10px;
+      }
+
+      main {
+        padding: 20px;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .input-container {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      select {
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 5px;
+        border: 1px solid #77bec6;
+        color: #2e3f62;
+        transition: 0.5s;
+      }
+
+      .selector:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+
+      .info-container {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #77bec6, #4f6f96);
+        color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .info-container h2 {
+        margin-top: 0;
+      }
+
+      .info-container ul {
+        padding-left: 20px;
+        list-style-type: disc;
+      }
+
+      .general-fun-facts {
+        margin-top: 40px;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #77bec6;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .general-fun-facts h3 {
+        margin-top: 0;
+      }
+
+      .heading {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <img src="images/healthscout1.png" alt="Logo" />
+      </div>
+      <nav>
+        <a href="index.html">HOME</a>
+      </nav>
+    </header>
+
+    <main>
+      <h2 class="heading">Discover Information About Your Blood Type</h2>
+      <p class="heading">
+        Select your blood type from the list below to learn more about it:
+      </p>
+
+      <div class="input-container">
+        <select id="bloodTypeSelector" class="selector">
+          <option value="" disabled selected>Select your blood type</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+        </select>
+      </div>
+
+      <div id="infoContainer" class="info-container" style="display: none">
+        <h2>Blood Type Info</h2>
+        <ul id="infoText"></ul>
+      </div>
+
+      <div class="general-fun-facts">
+        <h3>General Fun Facts About Blood Types</h3>
+        <ul>
+          <li>
+            Blood type frequencies vary significantly around the world due to
+            genetic evolution.
+          </li>
+          <li>Mosquitoes are more attracted to people with type O blood.</li>
+          <li>
+            O-negative is known as the universal donor for red blood cells.
+          </li>
+          <li>AB-positive is the universal recipient for red blood cells.</li>
+          <li>
+            Your blood type is inherited from your parents and determined by a
+            mix of their ABO and Rh genes.
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <script>
+      const bloodInfo = {
+        "A+": [
+          "Common blood type, found in about 34% of the global population.",
+          "Can donate blood to A+ and AB+ recipients.",
+          "Can receive blood from A+, A−, O+, and O− donors.",
+          "Highly sought for platelet donations.",
+        ],
+        "A-": [
+          "Relatively rare, occurring in about 6% of the global population.",
+          "Can donate blood to A+, A−, AB+, and AB− recipients.",
+          "Can receive blood only from A− and O− donors.",
+          "Known for universal plasma donation in emergencies.",
+        ],
+        "B+": [
+          "Found in about 9% of the global population.",
+          "Can donate blood to B+ and AB+ recipients.",
+          "Can receive blood from B+, B−, O+, and O− donors.",
+          "Linked to resistance against certain heart diseases.",
+        ],
+        "B-": [
+          "Rare, making up only about 2% of the global population.",
+          "Can donate blood to B+, B−, AB+, and AB− recipients.",
+          "Can receive blood only from B− and O− donors.",
+          "Highly sought after in blood banks due to rarity.",
+        ],
+        "O+": [
+          "Most common blood type, found in about 39% of the global population.",
+          "Can donate blood to O+, A+, B+, and AB+ recipients.",
+          "Can receive blood from O+ and O− donors.",
+          "Often used in trauma and emergency situations.",
+        ],
+        "O-": [
+          "Known as the universal donor for red blood cells.",
+          "Found in about 7% of the global population.",
+          "Can donate blood to all blood types.",
+          "Can receive blood only from O− donors.",
+        ],
+        "AB+": [
+          "The universal recipient for red blood cells.",
+          "Makes up about 3% of the global population.",
+          "Can donate blood only to AB+ recipients.",
+          "Highly sought after for plasma donations.",
+        ],
+        "AB-": [
+          "Extremely rare, found in less than 1% of the global population.",
+          "Can donate blood to AB+ and AB− recipients.",
+          "Can receive blood only from AB−, A−, B−, and O− donors.",
+          "Valuable for universal plasma donation.",
+        ],
+      };
+
+      const bloodTypeSelector = document.getElementById("bloodTypeSelector");
+      const infoContainer = document.getElementById("infoContainer");
+      const infoText = document.getElementById("infoText");
+
+      bloodTypeSelector.addEventListener("change", function () {
+        const selectedType = bloodTypeSelector.value;
+        if (selectedType && bloodInfo[selectedType]) {
+          infoText.innerHTML = bloodInfo[selectedType]
+            .map((info) => `<li>${info}</li>`)
+            .join("");
+          infoContainer.style.display = "block";
+        } else {
+          infoContainer.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>
